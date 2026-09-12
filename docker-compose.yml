@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: uniconnect_db
+    environment:
+      POSTGRES_USER: uniconnect
+      POSTGRES_PASSWORD: uniconnect_password
+      POSTGRES_DB: uniconnect
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: uniconnect_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
