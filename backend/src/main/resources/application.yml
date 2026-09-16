@@ -2,7 +2,7 @@ spring:
   application:
     name: uniconnect-backend
   datasource:
-    url: jdbc:postgresql://localhost:5432/uniconnect
+    url: jdbc:postgresql://localhost:5433/uniconnect
     username: uniconnect
     password: uniconnect_password
     driver-class-name: org.postgresql.Driver
