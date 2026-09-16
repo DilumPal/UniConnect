@@ -38,8 +38,14 @@ export default function CompanyDashboard() {
 
       <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="glass-panel p-6 col-span-1 md:col-span-2">
-          <h2 className="text-xl font-bold mb-4">Active Job Postings</h2>
-          <p className="text-text-secondary">Your published jobs will appear here.</p>
+          <h2 className="text-xl font-bold mb-4">Job & Application Management</h2>
+          <p className="text-text-secondary mb-6">Create new job postings and review student applications.</p>
+          <button 
+            onClick={() => router.push("/company/jobs")}
+            className="btn-primary w-full md:w-auto"
+          >
+            Go to Job Manager
+          </button>
         </div>
         
         <div className="glass-panel p-6">

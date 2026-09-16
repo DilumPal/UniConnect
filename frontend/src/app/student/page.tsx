@@ -39,8 +39,14 @@ export default function StudentDashboard() {
 
       <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="glass-panel p-6 col-span-1 md:col-span-2">
-          <h2 className="text-xl font-bold mb-4">Recommended Jobs</h2>
-          <p className="text-text-secondary">Your personalized job feed will appear here.</p>
+          <h2 className="text-xl font-bold mb-4">Job & Internship Discovery</h2>
+          <p className="text-text-secondary mb-6">Browse hundreds of active jobs posted by verified companies.</p>
+          <button 
+            onClick={() => router.push("/student/jobs")}
+            className="btn-primary w-full md:w-auto"
+          >
+            Go to Job Board
+          </button>
         </div>
         
         <div className="glass-panel p-6">
