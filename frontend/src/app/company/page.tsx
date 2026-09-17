@@ -42,9 +42,15 @@ export default function CompanyDashboard() {
           <p className="text-text-secondary mb-6">Create new job postings and review student applications.</p>
           <button 
             onClick={() => router.push("/company/jobs")}
-            className="btn-primary w-full md:w-auto"
+            className="btn-primary w-full md:w-auto mr-4"
           >
             Go to Job Manager
+          </button>
+          <button 
+            onClick={() => router.push("/research")}
+            className="btn-secondary w-full md:w-auto mt-4 md:mt-0"
+          >
+            Explore Academic Research
           </button>
         </div>
         

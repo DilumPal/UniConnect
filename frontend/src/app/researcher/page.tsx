@@ -38,8 +38,14 @@ export default function ResearcherDashboard() {
 
       <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="glass-panel p-6 col-span-1 md:col-span-2">
-          <h2 className="text-xl font-bold mb-4">My Research Projects</h2>
-          <p className="text-text-secondary">Manage your publications and ongoing collaborations.</p>
+          <h2 className="text-xl font-bold mb-4">Research Portfolio Management</h2>
+          <p className="text-text-secondary mb-6">Publish new projects, recruit collaborators, and manage ongoing research.</p>
+          <button 
+            onClick={() => router.push("/researcher/projects")}
+            className="btn-primary w-full md:w-auto !bg-accent hover:!bg-accent/80 text-white"
+          >
+            Go to Research Manager
+          </button>
         </div>
         
         <div className="glass-panel p-6">
