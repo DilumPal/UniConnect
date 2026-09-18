@@ -54,6 +54,34 @@ export default function StudentDashboard() {
             Browse Academic Research
           </button>
         </div>
+
+        <div className="glass-panel p-6 border-l-4 border-l-accent relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl">✨</div>
+          <h2 className="text-xl font-bold mb-4 text-accent">AI Career Matchmaker</h2>
+          <p className="text-text-secondary mb-4 text-sm">Let our Gemini AI analyze your profile and recommend the perfect opportunities.</p>
+          <button 
+            onClick={async (e) => {
+              const btn = e.currentTarget;
+              btn.innerText = "Analyzing...";
+              btn.disabled = true;
+              try {
+                const res = await fetch("http://localhost:8080/api/ai/recommend-jobs", {
+                  headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+                });
+                const data = await res.json();
+                alert(data.recommendation);
+              } catch(e) {
+                alert("AI failed to load recommendations. Make sure your API key is set.");
+              } finally {
+                btn.innerText = "Get Recommendations";
+                btn.disabled = false;
+              }
+            }}
+            className="btn-primary !bg-accent hover:!bg-accent/80 text-white w-full"
+          >
+            Get Recommendations
+          </button>
+        </div>
         
         <div className="glass-panel p-6">
           <h2 className="text-xl font-bold mb-4">My Profile</h2>

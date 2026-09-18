@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: uniconnect-backend
   datasource:
@@ -10,6 +12,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
+
+ai:
+  gemini:
+    api-key: ${GEMINI_API_KEY:your_api_key_here}
     properties:
       hibernate:
         format_sql: true

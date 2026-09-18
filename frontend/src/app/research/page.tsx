@@ -94,6 +94,31 @@ export default function ResearchDiscoveryBoard() {
                 <div className="flex flex-wrap gap-3 text-sm text-text-secondary mb-4">
                   <span className="bg-white/5 px-3 py-1 rounded-full border border-white/10">📚 {project.fieldOfStudy}</span>
                   <span className="bg-white/5 px-3 py-1 rounded-full border border-white/10">📅 {new Date(project.createdAt).toLocaleDateString()}</span>
+                  <button 
+                    onClick={async (e) => {
+                      const btn = e.currentTarget;
+                      const originalText = btn.innerText;
+                      btn.innerText = "Summarizing...";
+                      btn.disabled = true;
+                      try {
+                        const res = await fetch("http://localhost:8080/api/ai/summarize-research", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}` },
+                          body: JSON.stringify({ text: project.description })
+                        });
+                        const data = await res.json();
+                        alert("AI TL;DR Summary:\n\n" + data.summary);
+                      } catch(e) {
+                        alert("AI failed to summarize. Make sure your API key is set.");
+                      } finally {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                      }
+                    }}
+                    className="bg-accent/20 px-3 py-1 rounded-full border border-accent text-accent hover:bg-accent/40 transition-colors"
+                  >
+                    ✨ Generate TL;DR
+                  </button>
                 </div>
                 
                 <p className="text-text-secondary text-sm leading-relaxed max-w-3xl">

@@ -119,13 +119,47 @@ export default function StudentJobBoard() {
                 <p className="text-text-secondary text-sm max-w-2xl">{job.description}</p>
               </div>
               
-              <button 
-                onClick={() => applyForJob(job.id)}
-                disabled={applyingTo === job.id}
-                className="btn-primary whitespace-nowrap"
-              >
-                {applyingTo === job.id ? "Applying..." : "Apply Now"}
-              </button>
+              <div className="flex gap-2">
+                <button 
+                  onClick={async () => {
+                    setApplyingTo(job.id);
+                    setMessage("");
+                    try {
+                      const aiRes = await fetch("http://localhost:8080/api/ai/generate-cover-letter", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}` },
+                        body: JSON.stringify({ jobId: job.id })
+                      });
+                      const aiData = await aiRes.json();
+                      
+                      const applyRes = await fetch(`http://localhost:8080/api/jobs/${job.id}/apply`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}` },
+                        body: JSON.stringify({ coverLetterUrl: aiData.coverLetter })
+                      });
+                      if (applyRes.ok) setMessage("Application sent with AI Cover Letter!");
+                      else setMessage("Failed to apply.");
+                    } catch (e) {
+                      setMessage("Error generating cover letter.");
+                    } finally {
+                      setApplyingTo(null);
+                      setTimeout(() => setMessage(""), 5000);
+                    }
+                  }}
+                  disabled={applyingTo === job.id}
+                  className="btn-primary !bg-accent hover:!bg-accent/80 text-white whitespace-nowrap text-sm px-4"
+                  title="Generate a tailored cover letter using AI and apply"
+                >
+                  {applyingTo === job.id ? "Working..." : "✨ Apply with AI"}
+                </button>
+                <button 
+                  onClick={() => applyForJob(job.id)}
+                  disabled={applyingTo === job.id}
+                  className="btn-primary whitespace-nowrap text-sm px-4"
+                >
+                  Apply
+                </button>
+              </div>
             </div>
           ))
         )}
