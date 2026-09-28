@@ -23,7 +23,7 @@ export default function StudentDashboard() {
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="h-screen overflow-hidden p-8 flex flex-col">
       {/* Background Decor */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] bg-gradient-to-br from-background via-background to-primary/10" />
       
